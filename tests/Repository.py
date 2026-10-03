@@ -1400,14 +1400,9 @@ class Repository(Framework.TestCase):
         )
 
     def testGetImmutableReleasesConfiguration(self) -> None:
-        self.assertEqual(
-            self.repo.get_immutable_releases_configuration(),
-            {
-                "enabled": False,
-                "enforced_by_owner": False,
-                "url": "https://api.github.com/repos/PyGithub/PyGithub/immutable-releases",
-            },
-        )
+        configuration = self.repo.get_immutable_releases_configuration()
+        self.assertFalse(configuration.enabled)
+        self.assertFalse(configuration.enforced_by_owner)
 
     def testEnableImmutableReleases(self) -> None:
         self.repo.enable_immutable_releases()
